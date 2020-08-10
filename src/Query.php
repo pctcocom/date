@@ -1,5 +1,5 @@
 <?php
-namespace Pctco\Color;
+namespace Pctco\Date;
 use Data;
 /**
  * 查询
