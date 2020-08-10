@@ -1,3 +1,13 @@
+## Data
+```
+use Pctco\Date\Data;
+```
+```
+Data::week(); // 周/星期
+Data::zodiac(); // 生肖
+Data::constellation(); // 星座
+```
+
 ## Query
 ```
 use Pctco\Date\Query;

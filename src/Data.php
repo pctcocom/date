@@ -50,8 +50,8 @@ class Data{
       ];
    }
    /**
-   * @name week
-   * @describe 周/星期
+   * @name zodiac
+   * @describe 生肖
    * @return Array
    **/
    public static function zodiac(){
