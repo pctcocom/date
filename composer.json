@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Pctco\\Color\\": "src"
+            "Pctco\\Date\\": "src"
         }
     },
     "minimum-stability": "dev"
