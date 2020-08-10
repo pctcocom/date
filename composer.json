@@ -1,0 +1,14 @@
+{
+    "name": "pctco/date",
+    "description": "123",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "pctco",
+            "email": "pctco.com@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
