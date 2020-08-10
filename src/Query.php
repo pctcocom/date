@@ -1,6 +1,6 @@
 <?php
 namespace Pctco\Date;
-use Data;
+use Pctco\Date\Data;
 /**
  * 查询
  */
@@ -23,12 +23,12 @@ class Query{
    	$array['age'] = $age;
 
    	//计算生肖
-   	$animals = ['鼠', '牛', '虎', '兔', '龙', '蛇','马', '羊', '猴', '鸡', '狗', '猪'];
+   	$animals = Data::zodiac();
    	$key = ($by - 1900) % 12;
    	$array['animals'] = $animals[$key];
 
    	//计算星座
-   	$constellation_name = ['水瓶座','双鱼座','白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座)','射手座','摩羯座'];
+   	$constellation_name = Data::constellation();
    	if ($bd <= 22){
    		if ('1' !== $bm) $constellation = $constellation_name[$bm-2]; else $constellation = $constellation_name[11];
    	}else $constellation = $constellation_name[$bm-1];
@@ -39,12 +39,11 @@ class Query{
    /**
    * @name week
    * @describe 从日期中获取星期
-   * @param mixed $date 日期 0000-00-00
+   * @param mixed $time 时间戳
    * @return
    **/
-   public static function week($date){
-      $conversionDate = date('Y-m-d',strtotime($date)); //强制转换日期格式
-      $arr = explode("-", $conversionDate); //封装成数组
+   public static function week($time){
+      $arr = explode("-",date('Y-m-d',$time));
       //参数赋值
       $year = $arr[0]; //年
       $month = sprintf('%02d',$arr[1]); //月，输出2位整型，不够2位右对齐
@@ -53,10 +52,10 @@ class Query{
       //转换成时间戳
       $strap = mktime($hour,$minute,$second,$month,$day,$year);
       //获取数字型星期几
-      $number_wk=date("w",$strap);
+      $wk=date("w",$strap);
       //自定义星期数组
       $week = Data::week();
       //获取数字对应的星期
-      return $week[$number_wk];
+      return $week[$wk];
    }
 }
