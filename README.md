@@ -1,3 +1,8 @@
+## Install
+```
+composer require pctco/date dev-master
+```
+
 ## Data
 ```
 use Pctco\Date\Data;
