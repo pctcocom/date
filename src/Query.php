@@ -90,7 +90,7 @@ class Query{
    * @return
    **/
    public static function interval($time){
-      $limit = time() - $time;
+      $limit = time() - (int)$time;
       $r = "";
       if($limit < 60) {
          $r = '刚刚发表';
