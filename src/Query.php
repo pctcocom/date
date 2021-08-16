@@ -85,27 +85,30 @@ class Query{
    * @name interval
    * @describe 间隔 发布文章等日期计算
    * @param mixed $time 时间戳
-   * @param mixed $redata 返回时间类型  day = 天  hour = 小时
+   * @param mixed $depth 深度 [minutes(分),hours(小时),days(天),months(月)]
    * @param mixed $format 时间格式
    * @return
    **/
-   public static function interval($time){
+   public static function interval($time,$depth,$format = 'Y-m-d'){
       $limit = time() - (int)$time;
       $r = "";
       if($limit < 60) {
-         $r = '刚刚发表';
-      } elseif($limit >= 60 && $limit < 3600) {
-         $r = floor($limit / 60) . '分钟前';
-      } elseif($limit >= 3600 && $limit < 86400) {
-         $r = floor($limit / 3600) . '小时前';
-      } elseif($limit >= 86400 && $limit < 2592000) {
-         $r = floor($limit / 86400) . '天前';
-      } elseif($limit >= 2592000 && $limit < 31104000) {
-         $r = floor($limit / 2592000) . '个月前';
+         $r = lang('Just published'); // Just published
+      } elseif($limit >= 60 && $limit < 3600 && in_array('minutes',$depth)) { // 分钟前
+         $r = floor($limit / 60) . lang('minutes ago');
+      } elseif($limit >= 3600 && $limit < 86400 && in_array('hours',$depth)) { // 小时前
+         $r = floor($limit / 3600) . lang('hours ago');
+      } elseif($limit >= 86400 && $limit < 86400*7 && in_array('days',$depth)) { // 天前
+         $r = floor($limit / 86400) . lang('days ago');
       } else {
-         $r = date('Y-m-d',$time);
+         $r = date($format,$time);
       }
       return $r;
+
+
+      // elseif($limit >= 2592000 && $limit < 31104000 && in_array('months',$depth)) { // 个月前
+      //    $r = floor($limit / 2592000) . lang('months ago');
+      // }
    }
    /**
    * @name get day
