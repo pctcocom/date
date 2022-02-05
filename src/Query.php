@@ -36,6 +36,18 @@ class Query{
 
    	return $array;
    }
+   /** 
+    ** 判断闰年还是平年
+    *? @date 22/02/05 12:18
+    */
+   public static function year(){
+      $year = date('Y');
+      if(($year%4 == 0 && $year%100 != 0) || ($year%400 == 0 )) { // 闰年
+         return 366;
+      }else { // 平年
+         return 365;
+      }
+   }
    /**
    * @name week
    * @describe 从日期中获取星期
@@ -92,17 +104,31 @@ class Query{
    public static function interval($time,$depth,$format = 'Y-m-d'){
       $limit = time() - (int)$time;
       $r = "";
-      if($limit < 60) {
-         $r = lang('Just published'); // Just published
-      } elseif($limit >= 60 && $limit < 3600 && in_array('minutes',$depth)) { // 分钟前
-         $r = floor($limit / 60) . lang('minutes ago');
-      } elseif($limit >= 3600 && $limit < 86400 && in_array('hours',$depth)) { // 小时前
-         $r = floor($limit / 3600) . lang('hours ago');
-      } elseif($limit >= 86400 && $limit < 86400*7 && in_array('days',$depth)) { // 天前
-         $r = floor($limit / 86400) . lang('days ago');
-      } else {
-         $r = date($format,$time);
+
+      if (is_array($depth)) {
+         if($limit < 60) {
+            $r = lang('Just published'); // Just published
+         } elseif($limit >= 60 && $limit < 3600 && in_array('minutes',$depth)) { // 分钟前
+            $r = floor($limit / 60) . lang('minutes ago');
+         } elseif($limit >= 3600 && $limit < 86400 && in_array('hours',$depth)) { // 小时前
+            $r = floor($limit / 3600) . lang('hours ago');
+         } elseif($limit >= 86400 && $limit < 86400*7 && in_array('days',$depth)) { // 天前
+            $r = floor($limit / 86400) . lang('days ago');
+         } else {
+            $r = date($format,$time);
+         }
+      }else{
+         /** 
+          ** 获取今年已经过去几个周了 (如果今天是星期6，这个星期则不算)
+          *? @date 22/02/05 12:36
+          *! @return INT
+          */
+         if ($depth === 'past-week') {
+            $r = (int)($limit/60/60/24/7) - 1;
+         }
       }
+
+      
       return $r;
 
 
