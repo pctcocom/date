@@ -124,7 +124,7 @@ class Query{
           *! @return INT
           */
          if ($depth === 'past-week') {
-            $r = (int)($limit/60/60/24/7) - 1;
+            $r = round($limit/60/60/24/7) - 1;
          }
       }
 
