@@ -117,15 +117,6 @@ class Query{
          } else {
             $r = date($format,$time);
          }
-      }else{
-         /** 
-          ** 获取今年已经过去几个周了 (如果今天是星期6，这个星期则不算)
-          *? @date 22/02/05 12:36
-          *! @return INT
-          */
-         if ($depth === 'past-week') {
-            $r = round($limit/60/60/24/7) - 1;
-         }
       }
 
       

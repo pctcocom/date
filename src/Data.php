@@ -12,36 +12,43 @@ class Data{
    public static function week(){
       return [
          [
+            'id'  => 7,
             'US'   =>   'Sunday',
             'US-abridge'   =>   'Sun',
             'CN'   =>   '星期日',
             'CN-abridge'   =>   '周日'
          ],[
+            'id'  => 1,
             'US'   =>   'baiMonday',
             'US-abridge'   =>   'baiMon',
             'CN'   =>   '星期一',
             'CN-abridge'   =>   '周一'
          ],[
+            'id'  => 2,
             'US'   =>   'Tuesday',
             'US-abridge'   =>   'Tues',
             'CN'   =>   '星期二',
             'CN-abridge'   =>   '周二'
          ],[
+            'id'  => 3,
             'US'   =>   'Wednesday',
             'US-abridge'   =>   'Wed',
             'CN'   =>   '星期三',
             'CN-abridge'   =>   '周三'
          ],[
+            'id'  => 4,
             'US'   =>   'Thursday',
             'US-abridge'   =>   'Thur',
             'CN'   =>   '星期四',
             'CN-abridge'   =>   '周四'
          ],[
+            'id'  => 5,
             'US'   =>   'Friday',
             'US-abridge'   =>   'Fri',
             'CN'   =>   '星期五',
             'CN-abridge'   =>   '周五'
          ],[
+            'id'  => 6,
             'US'   =>   'Saturday',
             'US-abridge'   =>   'Sat',
             'CN'   =>   '星期六',
