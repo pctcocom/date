@@ -155,4 +155,12 @@ class Query{
       $millisecond = str_pad($millisecond,3,'0',STR_PAD_RIGHT);
       return strval(date("YmdHis").$millisecond);
    }
+   /** 
+    ** 13位时间戳
+    *? @date 22/08/29 16:37
+    */
+   public static function time_13() { 
+      list($t1, $t2) = explode(' ', microtime()); 
+      return (int)sprintf('%.0f',(floatval($t1)+floatval($t2))*1000); 
+   }
 }
