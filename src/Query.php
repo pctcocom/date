@@ -5,12 +5,6 @@ use Pctco\Date\Data;
  * 查询
  */
 class Query{
-   /**
-   * @name attr
-   * @describe 根据出生日期计算年龄、生肖、星座
-   * @param mixed $date = "0000-00-00" 日期
-   * @return Array
-   **/
    public static function attr($date){
       //计算年龄
    	$birth = $date;
@@ -36,10 +30,6 @@ class Query{
 
    	return $array;
    }
-   /** 
-    ** 判断闰年还是平年
-    *? @date 22/02/05 12:18
-    */
    public static function year(){
       $year = date('Y');
       if(($year%4 == 0 && $year%100 != 0) || ($year%400 == 0 )) { // 闰年
@@ -48,12 +38,6 @@ class Query{
          return 365;
       }
    }
-   /**
-   * @name week
-   * @describe 从日期中获取星期
-   * @param mixed $time 时间戳
-   * @return
-   **/
    public static function week($time){
       $arr = explode("-",date('Y-m-d',$time));
       //参数赋值
@@ -70,12 +54,6 @@ class Query{
       //获取数字对应的星期
       return $week[$wk];
    }
-   /**
-   * @name countdown
-   * @describe 倒计时
-   * @param mixed $stamp 时间戳
-   * @return Array
-   **/
    public static function countdown($stamp){
       $second = $stamp - time();
       $day = floor($second/(3600*24));
@@ -93,14 +71,6 @@ class Query{
       $second = $second > 9 ? $second : '0'.$second;
       return [$day,$hour,$minute,$second];
    }
-   /**
-   * @name interval
-   * @describe 间隔 发布文章等日期计算
-   * @param mixed $time 时间戳
-   * @param mixed $depth 深度 [minutes(分),hours(小时),days(天),months(月)]
-   * @param mixed $format 时间格式
-   * @return
-   **/
    public static function interval($time,$depth,$format = 'Y-m-d'){
       $limit = time() - (int)$time;
       $r = "";
@@ -127,15 +97,6 @@ class Query{
       //    $r = floor($limit / 2592000) . lang('months ago');
       // }
    }
-   /**
-   * @name get day
-   * @describe 获取上下天数
-   * @param mixed $day 获取天数
-   * @param mixed $order 排序 asc/desc
-   * @param mixed $time 开始时间 时间戳
-   * @param mixed $format 时间格式
-   * @return Array
-   **/
    public static function day($day,$time,$order = 'asc',$format = 'Y-m-d'){
       $week = $order == 'asc'?date('w', $time):$day;
       $date = [];
@@ -144,21 +105,33 @@ class Query{
       }
       return $date;
    }
-   /**
-   * @name time_17
-   * @describe 17位时间戳
-   * @return String
-   **/
+   public static function specified($interval = 0,$start = '08:00:00',$end = '18:00:00'){
+      $time = time();
+      if ($interval < 0) $time = time() - 86400*$interval;
+      if ($interval > 0) $time = time() + 86400*$interval;
+      
+      $date = date('Y-m-d',$time);
+      $unix_start = strtotime($date.$start);
+      $unix_end = strtotime($date.$end);
+
+      $status = $unix_start <= $time && $unix_end >= $time;
+      $interval_start = $unix_start - time();
+      $interval_end = $unix_end - time();
+      return [
+         'status' => $status,
+         'interval'  => [
+            'time'   => $time,
+            'start'  => $interval_start,
+            'end' => $interval_end
+         ]
+      ];
+   }
    public static function time_17(){
       list($usec, $sec) = explode(" ", microtime());
       $millisecond = round($usec*1000);
       $millisecond = str_pad($millisecond,3,'0',STR_PAD_RIGHT);
       return strval(date("YmdHis").$millisecond);
    }
-   /** 
-    ** 13位时间戳
-    *? @date 22/08/29 16:37
-    */
    public static function time_13() { 
       list($t1, $t2) = explode(' ', microtime()); 
       return (int)sprintf('%.0f',(floatval($t1)+floatval($t2))*1000); 
