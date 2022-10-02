@@ -123,6 +123,10 @@ class Query{
             'time'   => $time,
             'start'  => $interval_start,
             'end' => $interval_end
+         ],
+         'unix'   => [
+            'start'  => $unix_start,
+            'end'  => $unix_end
          ]
       ];
    }
